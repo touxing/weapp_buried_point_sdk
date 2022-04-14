@@ -1,0 +1,46 @@
+{
+  "name": "buried_point",
+  "version": "1.0.0",
+  "main": "dist/weapptracker.min.js",
+  "author": "hotsuitor<hotsuitor@qq.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "cross-env rollup --config rollup.config.js --environment entry:src/index.js,dest:dist/weapptracker.js",
+    "build": "cross-env rollup --config rollup.config.js --environment entry:src/index.js,dest:dist/weapptracker.min.js,uglify",
+    "watch": "cross-env rollup --config rollup.config.js --environment entry:src/index.js,dest:dist/weapptracker.js -w"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@rollup/plugin-babel": "^5.3.1",
+    "@rollup/plugin-commonjs": "^21.0.3",
+    "@rollup/plugin-node-resolve": "^13.2.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "core-js": "3",
+    "cross-env": "^7.0.3",
+    "rollup": "^2.70.1",
+    "rollup-plugin-uglify": "^6.0.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhengguorong/xbosstrack.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zhengguorong/xbosstrack/issues"
+  },
+  "homepage": "https://github.com/zhengguorong/xbosstrack#readme",
+  "jest": {
+    "verbose": true,
+    "testEnvironment": "node",
+    "automock": false,
+    "collectCoverage": true,
+    "coverageDirectory": "./coverage/",
+    "testPathIgnorePatterns": [
+      "./__tests__/wx.js"
+    ],
+    "setupFiles": [
+      "./__tests__/wx.js"
+    ]
+  }
+}
