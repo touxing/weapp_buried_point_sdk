@@ -27,12 +27,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zhengguorong/xbosstrack.git"
+    "url": "git+https://github.com/touxing/weapp_buried_point_sdk.git"
   },
   "bugs": {
-    "url": "https://github.com/zhengguorong/xbosstrack/issues"
+    "url": "https://github.com/touxing/weapp_buried_point_sdk/issues"
   },
-  "homepage": "https://github.com/zhengguorong/xbosstrack#readme",
+  "homepage": "https://github.com/touxing/weapp_buried_point_sdk#readme",
   "jest": {
     "verbose": true,
     "testEnvironment": "node",
