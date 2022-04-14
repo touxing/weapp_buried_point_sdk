@@ -87,7 +87,7 @@ const tracks = {
 ### 4.验证
 
 打开控制台，查看是否成功收集
-
+![image](https://github.com/touxing/weapp_buried_point_sdk/blob/main/img/Snipaste_2022-04-14_14-37-00.jpg?raw=true)
 
 ## 参考
 
