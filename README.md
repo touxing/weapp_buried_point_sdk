@@ -92,4 +92,5 @@ const tracks = {
 ## 参考
 
 [小程序从手动埋点到自动埋点](https://github.com/zhengguorong/articles/issues/34)
+
 [DEMO](https://github.com/touxing/miniprogram-webpack/tree/dev)

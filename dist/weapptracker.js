@@ -4371,8 +4371,6 @@
         var elementTracker = function elementTracker(e) {
           var tracks = _this2.findActivePageTracks('element');
 
-          console.log('tracks', tracks);
-
           var _getActivePage = getActivePage(),
               data = _getActivePage.data;
 
