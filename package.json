@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "cross-env rollup --config rollup.config.js --environment entry:src/index.js,dest:dist/weapptracker.js",
     "build": "cross-env rollup --config rollup.config.js --environment entry:src/index.js,dest:dist/weapptracker.min.js,uglify",
-    "watch": "cross-env rollup --config rollup.config.js --environment entry:src/index.js,dest:dist/weapptracker.js -w"
+    "watch": "cross-env rollup --config rollup.config.js --environment entry:src/index.js,dest:dist/weapptracker.js -w",
+    "test": "cross-env BABEL_ENV=test jest",
+    "codecov": "pnpx codecov"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",
@@ -19,6 +21,7 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "core-js": "3",
     "cross-env": "^7.0.3",
+    "jest": "^27.5.1",
     "rollup": "^2.70.1",
     "rollup-plugin-uglify": "^6.0.4"
   },
