@@ -80,7 +80,7 @@ class Reporter {
             // header: { 'content-type': 'application/x-www-form-urlencoded' },
           })
           .then(() => {
-            console.log('send 埋点', json)
+            console.table(postData)
           })
           .catch((error) => {
             // 发送失败的时候将该次信息从小存到 queue 队尾

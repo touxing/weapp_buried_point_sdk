@@ -122,8 +122,6 @@ class Tracker extends Wrapper {
       // 生命周期不排除劫持，同样作为“方法”劫持，在配置文件按需配置 生命周期函数 触发的埋点
       if (options.hasOwnProperty(prop) && typeof options[prop] == 'function') {
         // 重写options身上的自定义方法
-        // 自动给每个page增加elementTracker方法，用作元素埋点
-        // this.elementTracker()
         // 自动给page下预先定义的方法进行监听，用作方法执行埋点
         // this.methodTracker()
         options[prop] = usePageClickEvent(options[prop], (name, e) => {

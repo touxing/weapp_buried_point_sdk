@@ -3800,9 +3800,24 @@
     return typeof val !== 'undefined' && val !== 'undefined';
   }
   function isEmptyObject(obj) {
-    return Object.keys(obj).length === 0;
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+  /**
+   * @desc 获取当前  Page
+   */
+
+  function getCurrentPage() {
+    var pages = getCurrentPages();
+    return pages[pages.length - 1];
   }
   /** 获取当前页面的地址 */
+
 
   function getCurrentPageUrl() {
     return getCurrentPage().route;
@@ -3824,11 +3839,9 @@
   var useAppLaunch = function useAppLaunch(oldOnLunch) {
     return _proxyHooks(oldOnLunch, function () {
       var data = {
-        event: 'appLaunch',
-        path: this.route || '',
-        title: 'cmbc_FUN'
+        event: 'appLaunch'
       };
-      this.$ta.track('devices', data);
+      this.$ta.track('appLaunch', data);
     });
   };
   var useAppShow = function useAppShow(oldOnShow) {
@@ -3838,7 +3851,7 @@
         toUrl: getCurrentPageUrl(),
         fromUrl: getCurrentPageFromUrl()
       };
-      this.$ta.track('devices', data);
+      this.$ta.track('appShow', data);
     });
   };
   var useAppHide = function useAppHide(oldOnHide) {
@@ -3850,7 +3863,7 @@
         toUrl: getCurrentPageUrl(),
         fromUrl: getCurrentPageFromUrl()
       };
-      this.$ta.track('devices', data);
+      this.$ta.track('pageShow', data);
     });
   };
   var usePageHide = function usePageHide(oldOnHide) {
@@ -3860,7 +3873,7 @@
         toUrl: getCurrentPageUrl(),
         fromUrl: getCurrentPageFromUrl()
       };
-      this.$ta.track('devices', data);
+      this.$ta.track('pageHide', data);
     });
   };
   var usePageUnload = function usePageUnload(oldUnload) {
@@ -3870,7 +3883,7 @@
         toUrl: getCurrentPageUrl(),
         fromUrl: getCurrentPageFromUrl()
       };
-      this.$ta.track('devices', data);
+      this.$ta.track('pageUnload', data);
     });
   };
   /**
@@ -4109,7 +4122,6 @@
             data: data
           }, config), {}, {
             success: function success(res) {
-              console.log('request success', res.data);
               resolve(res.data);
             },
             fail: function fail(err) {
@@ -4225,7 +4237,7 @@
               timeout: this.config.timeout // header: { 'content-type': 'application/x-www-form-urlencoded' },
 
             }).then(function () {
-              console.log('send 埋点', json);
+              console.table(postData);
             })["catch"](function (error) {
               // 发送失败的时候将该次信息从小存到 queue 队尾
               console.error(error);
@@ -4358,6 +4370,8 @@
         // elementTracker变量名尽量不要修改，因为他和wxml下的名字是相对应的
         var elementTracker = function elementTracker(e) {
           var tracks = _this2.findActivePageTracks('element');
+
+          console.log('tracks', tracks);
 
           var _getActivePage = getActivePage(),
               data = _getActivePage.data;
@@ -4612,8 +4626,6 @@
         // 生命周期不排除劫持，同样作为“方法”劫持，在配置文件按需配置 生命周期函数 触发的埋点
         if (options.hasOwnProperty(prop) && typeof options[prop] == 'function') {
           // 重写options身上的自定义方法
-          // 自动给每个page增加elementTracker方法，用作元素埋点
-          // this.elementTracker()
           // 自动给page下预先定义的方法进行监听，用作方法执行埋点
           // this.methodTracker()
           options[prop] = usePageClickEvent(options[prop], function (name, e) {

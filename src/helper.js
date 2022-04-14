@@ -14,7 +14,20 @@ export function isDef(val) {
   return typeof val !== 'undefined' && val !== 'undefined'
 }
 export function isEmptyObject(obj) {
-  return Object.keys(obj).length === 0
+  for(var key in obj) {
+    if(obj.hasOwnProperty(key)) {
+      return false
+    }
+  }
+  return true
+}
+
+/**
+ * @desc 获取当前  Page
+ */
+ function getCurrentPage() {
+  const pages = getCurrentPages()
+  return pages[pages.length - 1]
 }
 
 /** 获取当前页面的地址 */
@@ -39,10 +52,8 @@ export const useAppLaunch = (oldOnLunch) =>
   _proxyHooks(oldOnLunch, function () {
     const data = {
       event: 'appLaunch',
-      path: this.route || '',
-      title: 'cmbc_FUN',
     }
-    this.$ta.track('devices', data)
+    this.$ta.track('appLaunch', data)
   })
 
 export const useAppShow = (oldOnShow) => {
@@ -52,7 +63,7 @@ export const useAppShow = (oldOnShow) => {
       toUrl: getCurrentPageUrl(),
       fromUrl: getCurrentPageFromUrl(),
     }
-    this.$ta.track('devices', data)
+    this.$ta.track('appShow', data)
   })
 }
 
@@ -61,7 +72,7 @@ export const useAppHide = (oldOnHide) => {
     const data = {
       event: 'appHide',
     }
-    this.$ta.track('devices', data)
+    this.$ta.track('appHide', data)
   })
 }
 
@@ -72,7 +83,7 @@ export const usePageShow = (oldOnShow) => {
       toUrl: getCurrentPageUrl(),
       fromUrl: getCurrentPageFromUrl(),
     }
-    this.$ta.track('devices', data)
+    this.$ta.track('pageShow', data)
   })
 }
 export const usePageHide = (oldOnHide) => {
@@ -82,7 +93,7 @@ export const usePageHide = (oldOnHide) => {
       toUrl: getCurrentPageUrl(),
       fromUrl: getCurrentPageFromUrl(),
     }
-    this.$ta.track('devices', data)
+    this.$ta.track('pageHide', data)
   })
 }
 
@@ -93,7 +104,7 @@ export const usePageUnload = (oldUnload) => {
       toUrl: getCurrentPageUrl(),
       fromUrl: getCurrentPageFromUrl(),
     }
-    this.$ta.track('devices', data)
+    this.$ta.track('pageUnload', data)
   })
 }
 

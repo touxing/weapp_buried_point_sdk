@@ -19,7 +19,6 @@ class Request {
           data: data,
           ...config,
           success(res) {
-            console.log('request success',res.data)
             resolve(res.data)
           },
           fail(err) {
